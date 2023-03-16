@@ -52,6 +52,8 @@ public class JWTService implements JWTHandler {
         userDTO.setLogin(jwsClaims.getBody().get("login", String.class));
         userDTO.setUserRoleString(jwsClaims.getBody().get("role", String.class));
 
+        System.out.println("UserLogin in token " + userDTO.getLogin() + " role = " + userDTO.getUserRoleString());
+
         return userDTO;
 //        return UserDTO.builder()
 //                .id(jwsClaims.getBody().get("id", Long.class))

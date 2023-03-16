@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>y88.kirill</groupId>
+            <artifactId>core-lib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>

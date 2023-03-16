@@ -4,6 +4,7 @@ package y88.kirill.msauth.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,6 +73,11 @@ public class AuthController {
         UserDTO userDTO = userService.findByUserAndPassword(jwtRequestDTO.getLogin(), jwtRequestDTO.getPassword());
         String token = jwtHandler.generateToken(userDTO);
         return ResponseEntity.ok(new JwtResponseDTO(token, userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLogin(), userDTO.getEmail()));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> test (){
+        return ResponseEntity.of(Optional.of(String.format("какой то тестовый метод")));
     }
 
 

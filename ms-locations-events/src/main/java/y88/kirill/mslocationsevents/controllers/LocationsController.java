@@ -3,6 +3,7 @@ package y88.kirill.mslocationsevents.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import y88.kirill.mslocationsevents.dto.LocationDTO;
 import y88.kirill.mslocationsevents.services.LocationsService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,5 +33,12 @@ public class LocationsController {
     public ResponseEntity<List<LocationDTO>> getAll(){
         return ResponseEntity.ok( locationsService.findAll());
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/test")
+    public ResponseEntity<?> test (){
+        return ResponseEntity.of(Optional.of(String.format("какой то тестовый метод из локаций")));
+    }
+
 
 }
