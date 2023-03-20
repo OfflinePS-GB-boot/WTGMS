@@ -15,12 +15,20 @@ public class EventsService {
 
 
     public EventDTO toDTO (Event event){
-        EventDTO eventDTO = new EventDTO();
-
         LocationDTO locationDTO = locationsService.toDTO(event.getLocation());
-        eventDTO.setLocation(locationDTO);
-
-        return eventDTO;
+        return EventDTO.builder()
+                .id(event.getId())
+                .title(event.getTitle())
+                .description(event.getDescription())
+                .startDatetime(event.getStartDatetime())
+                .finishDatetime(event.getFinishDatetime())
+                .isActive(event.getIsActive())
+                .linkEventSite(event.getLinkEventSite())
+                .linkImage(event.getLinkImage())
+                .location(locationDTO)
+                .price(event.getPrice())
+                .price(event.getPrice())
+                .build();
     }
 
 }

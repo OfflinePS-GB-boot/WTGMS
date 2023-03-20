@@ -16,6 +16,8 @@ public interface EventsRepository extends JpaRepository<Event,Long> {
 
     Optional<Event> findById(Long id);
 
+
+
     @Query("SELECT e FROM Event e   where e.startDatetime >= :dateStart")
     Page<Event> findAllWithPageAfterCurrentDate(@Param("dateStart") LocalDateTime dateStart, Pageable pageable);
 
