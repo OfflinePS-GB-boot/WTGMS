@@ -4,16 +4,13 @@ package y88.kirill.mslocationsevents.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import y88.kirill.mslocationsevents.dto.LocationDTO;
+import org.springframework.web.bind.annotation.*;
+import y88.kirill.corelib.dtos.LocationDTO;
+import y88.kirill.corelib.dtos.LocationsInSector;
 import y88.kirill.mslocationsevents.services.LocationsService;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/locations")
@@ -39,6 +36,23 @@ public class LocationsController {
     public ResponseEntity<?> test (){
         return ResponseEntity.of(Optional.of(String.format("какой то тестовый метод из локаций")));
     }
+
+
+
+
+
+    @PostMapping(value = "/in-sector-and-subcategory", produces = "application/json")
+    public ResponseEntity<List<LocationDTO>> getAllByLocationsSubcategoryAndSector(@RequestBody LocationsInSector locationsInSector){
+
+        return ResponseEntity.ok(locationsService.findAllByLocationsSubcategoryAndSector(locationsInSector.getLatitudeMin(),
+                locationsInSector.getLatitudeMax(),
+                locationsInSector.getLongitudeMin(),
+                locationsInSector.getLongitudeMax(),
+                locationsInSector.getCategories()));
+
+    }
+
+
 
 
 }

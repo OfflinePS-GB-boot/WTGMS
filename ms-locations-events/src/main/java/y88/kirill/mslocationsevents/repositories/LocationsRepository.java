@@ -39,6 +39,32 @@ public interface LocationsRepository extends JpaRepository<Location,Long> {
             long cat1, long cat2, long cat3, long cat4
     );
 
+//    //выборка локаций по категориям в заданном секторе
+//    @Query(value = "select * from locations l " +
+//            "right join locations_events_categories lec on l.id = lec.location_id " +
+//            "where (l.latitude >= :latitudeMin and l.latitude <= :latitudeMax) " +
+//            "and (l.longitude >= :longitudeMin and l.longitude <= :longitudeMax) " +
+//            "and  lec.subcategory_id in (:cat1,:cat2,:cat3,:cat4)",nativeQuery = true)
+//    List<Location> findAllByLocationsSubcategoriesAndSector(
+//            Double latitudeMin, Double latitudeMax, Double longitudeMin, Double longitudeMax,
+//            long cat1, long cat2, long cat3, long cat4
+//    );
+
+
+    //выборка локаций по категориям в заданном секторе
+    @Query(value = "select * from locations l " +
+            "right join locations_events_categories lec on l.id = lec.location_id " +
+            "where (l.latitude >= :latitudeMin and l.latitude <= :latitudeMax) " +
+            "and (l.longitude >= :longitudeMin and l.longitude <= :longitudeMax) " +
+            "and  lec.subcategory_id = any (:subcategories) ",nativeQuery = true)
+    List<Location> findAllByLocationsSubcategoriesAndSector(
+            Double latitudeMin, Double latitudeMax, Double longitudeMin, Double longitudeMax,
+            @Param("subcategories") int[] subcategories
+    );
+
+
+
+
 
 
 }
