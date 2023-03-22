@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import y88.kirill.mslocationsevents.models.Event;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,7 +17,8 @@ public interface EventsRepository extends JpaRepository<Event,Long> {
 
     Optional<Event> findById(Long id);
 
-
+    @Query(value = "SELECT * FROM events  where events.location_id = :locationId", nativeQuery = true)
+    List<Event> findAllByLocation(@Param("locationId")Long locationId);
 
     @Query("SELECT e FROM Event e   where e.startDatetime >= :dateStart")
     Page<Event> findAllWithPageAfterCurrentDate(@Param("dateStart") LocalDateTime dateStart, Pageable pageable);

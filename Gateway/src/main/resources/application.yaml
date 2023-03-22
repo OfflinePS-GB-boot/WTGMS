@@ -26,3 +26,11 @@ spring:
           uri: lb://ms-locations-events
           predicates:
             - Path=/locations-events/**
+        - id: ms-routes-1
+          uri: lb://ms-routes
+          predicates:
+            - Path=/routes/**
+        - id: ms-auth-1
+          uri: lb://ms-auth
+          predicates:
+              - Path=/auth/**

@@ -10,10 +10,14 @@ import y88.kirill.corelib.dtos.LocationsInSector;
 
 import java.util.List;
 
-@FeignClient(value ="ms-locations-events" , path = "/locations-events/api/v1")
+@FeignClient(value ="ms-locations-events" , path = "/locations-events/api/v1/locations")
 public interface FeignLocations {
 
     @PostMapping(value = "/in-sector-and-subcategory", produces = "application/json")
     ResponseEntity<List<LocationDTO>> getAllByLocationsSubcategoryAndSector(@RequestBody LocationsInSector locationsInSector);
+
+    @PostMapping(value = "/in-sector-and-category", produces = "application/json")
+    ResponseEntity<List<LocationDTO>> getAllByLocationsCategoryAndSector(@RequestBody LocationsInSector locationsInSector);
+
 
 }

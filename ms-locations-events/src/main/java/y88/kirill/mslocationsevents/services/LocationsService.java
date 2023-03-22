@@ -16,6 +16,10 @@ public class LocationsService {
 
     private final LocationsRepository locationsRepository;
 
+    public LocationDTO findById(Long id){
+       return toDTO( locationsRepository.findById(id).orElse(Location.builder().title("Локации с данным id не найдено").build()));
+    }
+
     public List<LocationDTO> findAllWithPage(int page, int pageSize){
         return locationsRepository.findAllWithImage( PageRequest.of(page-1,pageSize))
                 .stream()
@@ -39,21 +43,26 @@ public class LocationsService {
                 .collect(Collectors.toList());
     }
 
+    public List<LocationDTO> findAllByLocationsCategoryAndSector (
+            Double latitudeMin, Double latitudeMax,
+            Double longitudeMin, Double longitudeMax,
+            int[] categories){
+
+        return locationsRepository.findAllByLocationsCategoriesAndSector(
+                        latitudeMin, latitudeMax, longitudeMin, longitudeMax, categories)
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<LocationDTO> findAllByManualTitleAndDescription(String manualTitle, int page, int pageSize){
+        return locationsRepository.findAllByManualTitleAndDescription( manualTitle,  PageRequest.of(page-1,pageSize))
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 
 
-//    public LocationDTO toDTO(Location location){
-//        LocationDTO locationDTO = new LocationDTO();
-//        locationDTO.setId(location.getId());
-//        locationDTO.setAddress(location.getAddress());
-//        locationDTO.setDescription(location.getDescription());
-//        locationDTO.setFullDescription(location.getFullDescription());
-//        locationDTO.setLinkImage(location.getLinkImage());
-//        locationDTO.setLinkSite(location.getLinkSite());
-//        locationDTO.setLatitude(location.getLatitude());
-//        locationDTO.setLongitude(location.getLongitude());
-//
-//        return locationDTO;
-//    }
 
     public LocationDTO toDTO(Location location){
         return LocationDTO.builder()
