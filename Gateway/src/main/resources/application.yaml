@@ -1,7 +1,8 @@
 server:
   port: 8179
   servlet:
-    context-path: /wtg
+    context-path:
+  forward-headers-strategy: framework
 
 eureka:
   client:
@@ -17,6 +18,20 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - AddResponseHeader=Access-Control-Allow-Origin, *
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - OPTIONS
+              - PUT
+              - DELETE
       discovery:
         locator:
           enabled: true

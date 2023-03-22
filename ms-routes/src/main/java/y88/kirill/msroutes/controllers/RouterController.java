@@ -57,9 +57,7 @@ public class RouterController {
         double[] coordinates =  routeService.getCoordinatesSector(lcs.getAddress(), lcs.getRadius());
         LocationsInSector locationsInSector = new LocationsInSector(coordinates[0],coordinates[1],coordinates[2],coordinates[3], lcs.getCategories());
 
-        ResponseEntity<List<LocationDTO>> ldtos = feignLocations.getAllByLocationsSubcategoryAndSector(locationsInSector);
-
-        return ResponseEntity.ok(ldtos.getBody());
+        return feignLocations.getAllByLocationsSubcategoryAndSector(locationsInSector);
     }
 
     @PostMapping(value = "/locations-by-categories-and-sector", consumes = "application/json")
@@ -70,10 +68,9 @@ public class RouterController {
         double[] coordinates =  routeService.getCoordinatesSector(lcs.getAddress(), lcs.getRadius());
         LocationsInSector locationsInSector = new LocationsInSector(coordinates[0],coordinates[1],coordinates[2],coordinates[3], lcs.getCategories());
 
-        ResponseEntity<List<LocationDTO>> ldtos = feignLocations.getAllByLocationsCategoryAndSector(locationsInSector);
-
-        return ResponseEntity.ok(ldtos.getBody());
+        return feignLocations.getAllByLocationsCategoryAndSector(locationsInSector);
     }
+
 
 
 
