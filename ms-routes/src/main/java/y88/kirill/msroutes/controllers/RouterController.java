@@ -55,7 +55,7 @@ public class RouterController {
         System.out.println("address  " + lcs.getAddress());
 
         double[] coordinates =  routeService.getCoordinatesSector(lcs.getAddress(), lcs.getRadius());
-        LocationsInSector locationsInSector = new LocationsInSector(coordinates[0],coordinates[1],coordinates[2],coordinates[3], lcs.getCategories());
+        LocationsInSector locationsInSector = new LocationsInSector(coordinates[3],coordinates[1],coordinates[0],coordinates[2], lcs.getCategories());
 
         return feignLocations.getAllByLocationsSubcategoryAndSector(locationsInSector);
     }
@@ -66,7 +66,7 @@ public class RouterController {
         System.out.println("address  " + lcs.getAddress());
 
         double[] coordinates =  routeService.getCoordinatesSector(lcs.getAddress(), lcs.getRadius());
-        LocationsInSector locationsInSector = new LocationsInSector(coordinates[0],coordinates[1],coordinates[2],coordinates[3], lcs.getCategories());
+        LocationsInSector locationsInSector = new LocationsInSector(coordinates[3],coordinates[1],coordinates[0],coordinates[2], lcs.getCategories());
 
         return feignLocations.getAllByLocationsCategoryAndSector(locationsInSector);
     }

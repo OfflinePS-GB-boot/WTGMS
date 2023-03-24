@@ -33,10 +33,10 @@ public class Sector {
 
 
     /**Возвращает двумерный массив в котором:
-     sector[0] - долгота левой верхней точки
-     sector[1]- широта левой верхней точки
-     sector[2]- долгота правой нижней точки
-     sector[3]- широта правой нижней точки
+     sector[0] - долгота левой верхней точки (longitudeMin)
+     sector[1]- широта левой верхней точки  (latitudeMax)
+     sector[2]- долгота правой нижней точки (longitudeMax)
+     sector[3]- широта правой нижней точки  (latitudeMin)
      PS возвращаем квадрат, который описывает окружность с заданный радиусом
      */
     public double[] getSectorByRadius(double centerLongitude, double centerLatitude, int radius ){
